@@ -2,6 +2,12 @@ import React from "react";
 
 class Shelf extends React.Component {
 
+    backgroundImageParser = (props) => {if(props.book.imageLinks === undefined ) {
+        this.props.book.imageLinks = ['thumbnail'];
+        this.props.book.imageLinks.thumbnail = 'https://library.britishcouncil.org.in/static-content/isbn/noimage.jpg';
+    }
+}
+
 
     render(){
 

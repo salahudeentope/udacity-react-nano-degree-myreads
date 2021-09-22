@@ -6,6 +6,9 @@ import Search from  './components/Search.js'
 import SearchButton from './components/SearchButton'
 import Header from './components/Header'
 import * as BooksAPI from './BooksAPI'
+import {Route} from 'react-router-dom'
+import {debounce} from 'throttle-debounce'
+
 
 
 class BooksApp extends React.Component {
@@ -17,9 +20,27 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: []
+    books: [],
+    searchBooks: []
 
   }
+
+  searchForBooks = debounce(300, false, query => {
+    if (query.length > 0) {
+        BooksAPI.search(query).then(books => {
+            if (books.error) {
+                this.setState({ searchBooks: [] });
+            } else {
+                this.setState({ searchBooks: books });
+            }
+        });
+    } else {
+        this.setState({ searchBooks: [] });
+    }
+});
+resetSearch = () => {
+    this.setState({ searchBooks: [] });
+};
 
   updateSearchPageState = state =>{
     this.setState({showSearchPage: state})
@@ -71,14 +92,21 @@ class BooksApp extends React.Component {
       <div className="app">
         {this.state.showSearchPage ? (
          
-         <Search showHomePage={this.updateSearchPageState}/>
-        ) : (
+            <Route path="/search" render={() => (
+            <Search onSearch={this.searchForBooks}
+            searchBooks ={this.state.searchBooks}
+            onMove={this.changeShelf}
+            onResetSearch={this.resetSearch}
+            showHomePage={this.updateSearchPageState}
+            books={this.state.books}
+            />       )}/>) : (
           <div className="list-books">
 
             <Header />
             <Shelves allBooks={this.state.books} changeShelf={this.changeShelf}/>
 
             <SearchButton showHomePage={this.updateSearchPageState}/>
+
           </div>
         )}
       </div>
