@@ -55,8 +55,8 @@ resetSearch = () => {
 
     book.shelf = newValue;
 
-    this.setState( (state) => ({
-        books: state.books.filter( (b) => b.id !== book.id).concat([book])
+    this.setState( (prevState) => ({
+        books: prevState.books.filter( (bo) => bo.id !== book.id).concat([book])
     }))
 
     BooksAPI.update(book, newValue);
