@@ -1,5 +1,6 @@
 import React from "react";
 import Shelf from "./Shelf";
+import {Link} from 'react-router-dom'
 // import Shelf from "./Shelf";
 //import Shelves from "./Shelves";
 
@@ -17,10 +18,8 @@ class Search extends React.Component {
 
     render(){
         // const {onSearch, searchBooks, onMove, onResetSearch, showHomePage, books} = this.props;
-           // const { searchBooks, myBooks, onMove } = props;
           const searchBooks = this.props.searchBooks
           const  myBooks = this.props.books
-           //const omMove = this.props.changeShelf
         
             const updatedBooks = searchBooks.map(book => {
                 myBooks.map(b => {
@@ -35,7 +34,7 @@ class Search extends React.Component {
         return (
             <div className="search-books">
             <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.props.showHomePage(false)}>Close</button>
+              <Link className="close-search" to='/'>Close</Link>
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.

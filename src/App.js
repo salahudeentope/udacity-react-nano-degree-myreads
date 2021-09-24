@@ -67,48 +67,29 @@ resetSearch = () => {
     BooksAPI.update(book, newValue);
 
 }
-//(book, shelf) => {
-//     this.setState({
-//       books: this.state.books.map(b => {
-//         return b.id === book.id ? (b.shelf = shelf) : b
-//       })
-//     })
-//   }
 
-//   moveBookShelf = (book, newValue) => {
-
-//     book.props.book.shelf = newValue;
-
-//     this.setState( (state) => ({
-//         books: state.books.filter( (b) => b.id !== book.props.book.id).concat([book.props.book])
-//     }))
-
-//     BooksAPI.update(book.props.book, newValue);
-
-// }
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
          
-            <Route path="/search" render={() => (
+            <Route exact path="/search" render={() => (
             <Search onSearch={this.searchForBooks}
             searchBooks ={this.state.searchBooks}
             onMove={this.changeShelf}
             onResetSearch={this.resetSearch}
             showHomePage={this.updateSearchPageState}
             books={this.state.books}
-            />       )}/>) : (
-          <div className="list-books">
-
+            />       )}/>
+          <Route exact path='/' render ={() => (
+            <div>
             <Header />
             <Shelves allBooks={this.state.books} changeShelf={this.changeShelf}/>
 
             <SearchButton showHomePage={this.updateSearchPageState}/>
-
-          </div>
+            </div>
         )}
+        />
       </div>
     )
   }
