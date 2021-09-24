@@ -14,4 +14,4 @@ class SearchButton extends React.Component {
 }
 
 
-export default SearchButton 
+export default SearchButton

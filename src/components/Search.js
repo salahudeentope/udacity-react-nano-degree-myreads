@@ -27,7 +27,7 @@ class Search extends React.Component {
         // const {onSearch, searchBooks, onMove, onResetSearch, showHomePage, books} = this.props;
           const searchBooks = this.props.searchBooks
           const  myBooks = this.props.books
-        
+
             let updatedBooks = searchBooks.map(book => {
                 myBooks.map(b => {
                     if (b.id === book.id) {
@@ -37,11 +37,11 @@ class Search extends React.Component {
                 });
                 return book;
             });
-        
+
         return (
             <div className="search-books">
             <div className="search-books-bar">
-              <Link className="close-search" to='/'>Close</Link>
+              <Link className="close-search" to='/' onClick={this.props.onResetSearch}>Close</Link>
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -60,9 +60,6 @@ class Search extends React.Component {
               </div>
             </div>
             <Shelf books={updatedBooks} changeShelf={this.props.onMove}/>
-            {/* <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div> */}
           </div>
             )
        }
@@ -70,4 +67,4 @@ class Search extends React.Component {
 
 
 
-export default Search 
+export default Search

@@ -33,4 +33,4 @@ class Shelves extends React.Component {
 }
 
 
-export default Shelves 
+export default Shelves

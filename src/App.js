@@ -41,10 +41,6 @@ resetSearch = () => {
     this.setState({ searchBooks: [] });
 };
 
-  updateSearchPageState = state =>{
-    this.setState({showSearchPage: state})
-  }
-
   componentDidMount () {
       BooksAPI.getAll().then((response) => (
         this.setState((prevState) => {
@@ -71,21 +67,21 @@ resetSearch = () => {
   render() {
     return (
       <div className="app">
-         
+
             <Route exact path="/search" render={() => (
             <Search onSearch={this.searchForBooks}
             searchBooks ={this.state.searchBooks}
             onMove={this.changeShelf}
             onResetSearch={this.resetSearch}
-            showHomePage={this.updateSearchPageState}
             books={this.state.books}
-            />       )}/>
+            />
+              )}/>
           <Route exact path='/' render ={() => (
             <div>
             <Header />
             <Shelves allBooks={this.state.books} changeShelf={this.changeShelf}/>
 
-            <SearchButton showHomePage={this.updateSearchPageState}/>
+            <SearchButton />
             </div>
         )}
         />
