@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 class SearchButton extends React.Component {
 
-
     render(){
         return (
            // {/* SearchButton component */}

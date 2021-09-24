@@ -1,8 +1,13 @@
 import React from "react";
 import Shelf from './Shelf'
+import PropTypes from 'prop-types'
 
 class Shelves extends React.Component {
 
+    static propTypes = {
+        allBooks: PropTypes.array.isRequired,
+        changeShelf: PropTypes.func.isRequired
+    }
 
     render(){
         const allBooks = this.props.allBooks

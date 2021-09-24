@@ -1,10 +1,17 @@
 import React from "react";
 import Shelf from "./Shelf";
 import {Link} from 'react-router-dom'
-// import Shelf from "./Shelf";
-//import Shelves from "./Shelves";
+import PropTypes from 'prop-types'
 
 class Search extends React.Component {
+
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+    searchBooks: PropTypes.array.isRequired,
+    onSearch: PropTypes.func.isRequired,
+    onMove: PropTypes.func.isRequired
+}
+
     state = {
         value: '',
     };
@@ -21,7 +28,7 @@ class Search extends React.Component {
           const searchBooks = this.props.searchBooks
           const  myBooks = this.props.books
         
-            const updatedBooks = searchBooks.map(book => {
+            let updatedBooks = searchBooks.map(book => {
                 myBooks.map(b => {
                     if (b.id === book.id) {
                         book.shelf = b.shelf;
@@ -52,7 +59,7 @@ class Search extends React.Component {
 
               </div>
             </div>
-            <Shelf books={this.props.searchBooks} changeShelf={this.props.onMove}/>
+            <Shelf books={updatedBooks} changeShelf={this.props.onMove}/>
             {/* <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div> */}
